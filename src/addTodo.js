@@ -1,9 +1,9 @@
-"use strict";
+'use strict'
 
-const { v4 } = require("uuid")
-const AWS = require("aws-sdk")
-const middy = require("@middy/core")
-const httpJsonBodyParser = require("@middy/http-json-body-parser")
+const { v4 } = require('uuid')
+const AWS = require('aws-sdk')
+const middy = require('@middy/core')
+const httpJsonBodyParser = require('@middy/http-json-body-parser')
 
 const addTodo = async (event) => {
   const dynamodb = new AWS.DynamoDB.DocumentClient()
@@ -16,20 +16,22 @@ const addTodo = async (event) => {
     id,
     todo,
     createdAt,
-    completed: false
+    completed: false,
   }
 
-  await dynamodb.put({
-    TableName: "TodoTable",
-    Item: newTodo
-  }).promise()
-  
+  await dynamodb
+    .put({
+      TableName: 'TodoTable',
+      Item: newTodo,
+    })
+    .promise()
+
   return {
     statusCode: 200,
     body: JSON.stringify(newTodo),
-  };
-};
+  }
+}
 
 module.exports = {
-  handler: middy(addTodo).use(httpJsonBodyParser())
+  handler: middy(addTodo).use(httpJsonBodyParser()),
 }

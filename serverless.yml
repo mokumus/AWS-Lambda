@@ -10,7 +10,7 @@ provider:
       Action:
         - dynamodb:*
       Resource:
-        -  arn:aws:dynamodb:eu-central-1:521246156786:table/TodoTable
+        - arn:aws:dynamodb:eu-central-1:521246156786:table/TodoTable
 
 functions:
   addTodo:
@@ -51,4 +51,3 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        
